@@ -1,0 +1,41 @@
+{
+	"CartItems": [
+		{
+			"ProductId"   : 3,
+			"ProductName" : "Leather Driver Saddle Loafers",
+			"ProductStyle": "Tan",
+			"Category"    : "Men’s Footwear",
+			"ProductImg"  : "http://lorempixel.com/output/fashion-q-c-640-480-8.jpg",
+			"Price"       : 34.00,
+			"Qty"         : 1
+		},
+		{
+			"ProductId"   : 6,
+			"ProductName" : "Gold Button Cardigan",
+			"ProductStyle": "Black",
+			"Category"    : "Women’s Casualwear",
+			"ProductImg"  : "http://lorempixel.com/output/fashion-q-c-640-480-8.jpg",
+			"Price"       : 167.00,
+			"Qty"         : 3
+		},
+
+		{
+			"ProductId"   : 8,
+			"ProductName" : "Fine Stripe Short Sleeve Shirt",
+			"ProductStyle": "Grey",
+			"Category"    : "Men’s Casualwear",
+			"ProductImg"  : "http://lorempixel.com/output/fashion-q-c-640-480-8.jpg",
+			"Price"       : 49.00,
+			"Qty"         : 1
+		},
+		{
+			"ProductId"   : 11,
+			"ProductName" : "Lightweight Patch Pocket Blazer",
+			"ProductStyle": "Deer",
+			"Category"    : "Men’s Formalwear",
+			"ProductImg"  : "http://lorempixel.com/output/fashion-q-c-640-480-8.jpg",
+			"Price"       : 175.00,
+			"Qty"         : 2
+		}
+	]
+}

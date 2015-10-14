@@ -1,0 +1,36 @@
+<div class="col-lg-12">
+    <h4>Your Cart</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in cartCtrl.list">
+                <td>{{product.ProductName}}</td>
+                <td class="category-name">{{product.Category}}</td>
+                <td>{{product.Price | currency:"£"}}</td>
+                <td><input type="text" ng-model="product.Qty" ng-required ></td>
+                <td>{{product.Price * product.Qty | currency:"£"}} </td> 
+                <td>[<a href ng-click="cartCtrl.removeItem($index)">X</a>] </td>	
+            </tr>
+        </tbody>
+    </table>
+    <form class="form-inline">
+        <div class="form-group" ng-class="{'has-success has-feedback': cartCtrl.voucherSuccess}">
+            
+            <label class="control-label" for="voucherReedem">Voucher Reedem</label>
+            <input type="text" class="form-control" id="voucherReedem" ng-model="voucherName">
+            <button ng-click="cartCtrl.reedemVoucher(voucherName)" class="btn btn-primary" ng-disabled="cartCtrl.voucherSuccess">Reedem Voucher</button>
+        </div>
+    </form>
+    <p ng-show="cartCtrl.voucherSuccess" class="text-success">Voucher of {{cartCtrl.discount | currency:"£"}} applied</p>
+    <p ng-show="cartCtrl.voucherError" class="text-warning">Voucher invalid. Try again</p>
+    <h3>Total to Pay: {{ cartCtrl.total - cartCtrl.discount | currency:"£"}}</h3>
+</div>
