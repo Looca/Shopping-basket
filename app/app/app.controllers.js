@@ -9,11 +9,15 @@ var controllers = angular.module('app.controllers', []);
 
 controllers.controller('ProductsCtrl', ['appResponse', function(appResponse){
 	var productsCtrl = this;
-	
+
 	productsCtrl.miniCart = [];
 
 	appResponse.getData('products').then(function(response) {
 		productsCtrl.list = response.data.ProductsList;
+	},function(error) {
+		if(error.status == 404) {
+			productsCtrl.errorString = "Error " + error.status + ": Product " + error.statusText + "! Please try again later or contact the administrator of the site.";
+		}
 	});
 
 }]);
@@ -42,9 +46,13 @@ controllers.controller('CartCtrl', ['appResponse', function(appResponse){
 		cartCtrl.list = response.data.CartItems;
 		cartCtrl.total = getTotal(cartCtrl.list);
 		cartCtrl.vouchers = response.data.Vouchers;
+	},function(error) {
+		if(error.status == 404) {
+			cartCtrl.errorString = "Error " + error.status + ": Cart temporary not available! Please try again later or contact the administrator of the site.";
+		}
 	});
 
-	cartCtrl.removeItem = function(index) {
+	var removeItem = function(index) {
 		cartCtrl.list.splice(index, 1);
 		cartCtrl.total = getTotal(cartCtrl.list);
 		// Reset applied discounts
@@ -53,7 +61,7 @@ controllers.controller('CartCtrl', ['appResponse', function(appResponse){
 		cartCtrl.vouchererror = false;
 	}
 
-	cartCtrl.reedemVoucher = function(value){
+	var redeemVoucher = function(value) {
 		var reedemValue = value.toUpperCase(),
 			catReq = 0;
 		// Check if cart contains 'fotwear' keyword in category column
@@ -65,7 +73,7 @@ controllers.controller('CartCtrl', ['appResponse', function(appResponse){
     			}
     		}
  		});
- 		
+
 		// Check Vouchers code
 		if(reedemValue == "VOUCHER1"){
 			cartCtrl.discount = 5.00;
@@ -81,6 +89,11 @@ controllers.controller('CartCtrl', ['appResponse', function(appResponse){
 			cartCtrl.voucherError = true;
 		}
 
+	}
+
+	return cartCtrl = {
+			redeemVoucher: redeemVoucher,
+			removeItem: removeItem
 	}
 
 }]);
